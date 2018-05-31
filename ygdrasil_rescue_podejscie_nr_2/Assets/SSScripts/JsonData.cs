@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class JsonData : MonoBehaviour
+public class JsonData
 {
-    public int stars;
-    public float time;
+    public List<int> Stars;
+    public List<float> Time;
 
     public JsonData()
     {
-        stars = 0;
-        time = 0;
+        Stars = new List<int>();
+        Time = new List<float>();
     }
 }

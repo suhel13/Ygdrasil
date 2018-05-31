@@ -23,10 +23,11 @@ public class Star : MonoBehaviour
         if (fastSpawn == true)
         {
             starImage.fillAmount = 1f;
+            isEnded = true;
         }
         else if (latStar != null)
         {
-            Debug.LogWarning("shold show olny from first star");
+            Debug.LogWarning("shold be showed olny with the first star");
             if (latStar.GetComponent<Star>().isEnded)
             {
                 starCor = StartCoroutine(SpawnStar());
@@ -35,6 +36,11 @@ public class Star : MonoBehaviour
         else
         {
             starCor = StartCoroutine(SpawnStar());
+        }
+
+        if (starImage.fillAmount==1)
+        {
+            enabled = false;
         }
     }
 
