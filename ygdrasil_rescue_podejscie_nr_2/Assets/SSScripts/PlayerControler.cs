@@ -16,6 +16,7 @@ public class PlayerControler : MonoBehaviour
     public Image HpBar;
     bool movedThisTurn = false;
     int hp = 4;
+    int startHp;
     int damage = 1;
     int lastStage;
     bool playerIsDodging = false;
@@ -38,6 +39,7 @@ public class PlayerControler : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        startHp = hp;
         lastStage = enemyControler.levelData.lastStage;
         turnTimeStartValue = turnTime;
         updateHpBar();
@@ -96,6 +98,13 @@ public class PlayerControler : MonoBehaviour
                 {
                     uIControler.activeWinPanel();
                     isLevelEnded = true;
+                    uIControler.activeStar(1);
+                    // first star for end level
+                    if (hp==startHp)
+                    {
+                        uIControler.activeStar(2);
+                        //secend Star for didnt lose hp
+                    }
                 }
                 else
                     thisTurnPlayerTakeDamge = true;

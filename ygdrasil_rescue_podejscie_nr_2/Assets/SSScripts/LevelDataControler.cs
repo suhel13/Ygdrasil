@@ -6,13 +6,26 @@ public class LevelDataControler : MonoBehaviour
 {
     public int[] stagesWithEnemy;
     public char[] enemyTypes;
+    public int[] Stars;
     public int enemyCount;
     public int lastStage;
     public int minMove;
 
     private void Awake()
     {
-        LoadLevel(PlayerPrefs.GetInt("LevelToLoad"));
+        //PlayerPrefs.DeleteKey("Stars");
+        Stars = new int[15];
+        Stars[3] = 1;
+        if (PlayerPrefs.HasKey("Stars"))
+        {
+            Stars = JsonUtility.FromJson<int[]>(PlayerPrefs.GetString("Stars"));
+        }
+        else
+        {
+            PlayerPrefs.SetString("Stars", JsonUtility.ToJson(Stars));
+            PlayerPrefs.Save();
+        }
+        LoadLevel(PlayerPrefs.GetInt("LevelToLoad")); // this is set by button on map
     }
 
     void LoadLevel(int number)
@@ -32,10 +45,10 @@ public class LevelDataControler : MonoBehaviour
 
     void firstLevel()
     {
-        stagesWithEnemy = new int[] { 3, 7, 10, 15, 19 };
+        stagesWithEnemy = new int[] { 3, 7, 8, 13, 17 };
         enemyTypes = new char[] { 'w', 'w', 'd', 'w', 'd' };
         enemyCount = stagesWithEnemy.Length;
-        lastStage = 23;
+        lastStage = 20;
         minMove = countMinMove();
     }
 
@@ -52,13 +65,13 @@ public class LevelDataControler : MonoBehaviour
     {
         int CMM;
         CMM = lastStage;
-        foreach ( char type in enemyTypes)
+        foreach (char type in enemyTypes)
         {
-            if (type=='w')
+            if (type == 'w')
             {
                 CMM += 2;
             }
-            else if (type=='d')
+            else if (type == 'd')
             {
                 CMM += 3;
             }

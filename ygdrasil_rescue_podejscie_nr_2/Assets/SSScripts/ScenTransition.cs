@@ -11,6 +11,7 @@ public class ScenTransition : MonoBehaviour
     public GameObject loadPanel;
     public void loadScene(string sceneName)
     {
+        PlayerPrefs.Save();
         StartCoroutine(loadAsync(sceneName));
     }
 
