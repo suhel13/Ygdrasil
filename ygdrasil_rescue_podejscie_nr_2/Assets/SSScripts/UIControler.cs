@@ -30,12 +30,12 @@ public class UIControler : MonoBehaviour
         LosePanel.SetActive(false);
     }
 
-    public void activeStar(int count)
+    public void activeStar(int number)
     {
-        switch (count)
+        switch (number)
         {
             case 1:
-                if (levelDataCon.Stars[PlayerPrefs.GetInt("LevelToLoad") - 1] >= 1)
+                if (levelDataCon.Stars[PlayerPrefs.GetInt("LevelToLoad") - 1].stars >= 1)
                 {
                     firstStar.GetComponent<Star>().fastSpawn = true;
                     firstStar.SetActive(true);
@@ -47,7 +47,7 @@ public class UIControler : MonoBehaviour
                 }
                 break;
             case 2:
-                if (levelDataCon.Stars[PlayerPrefs.GetInt("LevelToLoad") - 1] >= 2)
+                if (levelDataCon.Stars[PlayerPrefs.GetInt("LevelToLoad") - 1] .stars>= 2)
                 {
                     secendStar.GetComponent<Star>().fastSpawn = true;
                     secendStar.SetActive(true);
@@ -65,8 +65,9 @@ public class UIControler : MonoBehaviour
 
     void saveStars(int count)
     {
-        levelDataCon.Stars[PlayerPrefs.GetInt("LevelToLoad") - 1] = count;
+        levelDataCon.Stars[PlayerPrefs.GetInt("LevelToLoad") - 1].stars = count;
         string tempjson = JsonUtility.ToJson(levelDataCon.Stars);
+        Debug.Log(tempjson);
         PlayerPrefs.SetString("Stars", tempjson);
         PlayerPrefs.Save();
     }

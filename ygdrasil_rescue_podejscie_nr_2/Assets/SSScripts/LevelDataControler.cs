@@ -6,19 +6,16 @@ public class LevelDataControler : MonoBehaviour
 {
     public int[] stagesWithEnemy;
     public char[] enemyTypes;
-    public int[] Stars;
+    public List<JsonData> Stars=new List<JsonData>();
     public int enemyCount;
     public int lastStage;
     public int minMove;
 
     private void Awake()
     {
-        //PlayerPrefs.DeleteKey("Stars");
-        Stars = new int[15];
-        Stars[3] = 1;
         if (PlayerPrefs.HasKey("Stars"))
         {
-            Stars = JsonUtility.FromJson<int[]>(PlayerPrefs.GetString("Stars"));
+            Stars = JsonUtility.FromJson<List<JsonData>>(PlayerPrefs.GetString("Stars"));
         }
         else
         {
@@ -50,6 +47,10 @@ public class LevelDataControler : MonoBehaviour
         enemyCount = stagesWithEnemy.Length;
         lastStage = 20;
         minMove = countMinMove();
+        if (Stars.Count<1)
+        {
+            Stars.Add(new JsonData());
+        }
     }
 
     void secendLevel()
@@ -59,6 +60,10 @@ public class LevelDataControler : MonoBehaviour
         enemyCount = stagesWithEnemy.Length;
         lastStage = 29;
         minMove = countMinMove();
+        if (Stars.Count < 2)
+        {
+            Stars.Add(new JsonData());
+        }
     }
 
     int countMinMove()
