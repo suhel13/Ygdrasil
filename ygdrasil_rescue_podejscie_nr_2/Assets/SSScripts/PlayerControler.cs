@@ -21,6 +21,7 @@ public class PlayerControler : MonoBehaviour
     int lastStage;
     bool playerIsDodging = false;
     float turnTime = 1;
+    float time;
     float minTurnTime;
     float turnTimeStartValue;
     bool isAlive = true;
@@ -97,6 +98,7 @@ public class PlayerControler : MonoBehaviour
                 if (actualStage + 1 == lastStage)
                 {
                     uIControler.activeWinPanel();
+                    uIControler.time = time;
                     isLevelEnded = true;
                     uIControler.activeStar(1);
                     // first star for end level
@@ -193,6 +195,7 @@ public class PlayerControler : MonoBehaviour
         {
             turnTime -= Time.deltaTime;
         }
+        time += Time.deltaTime;
         updateTimeBar();
     }
     void updateTimeBar() //update timeBar

@@ -12,6 +12,8 @@ public class UIControler : MonoBehaviour
     public GameObject firstStar;
     public GameObject secendStar;
 
+    public float time;
+
     public void activeWinPanel()
     {
         WinPanel.SetActive(true);
@@ -66,9 +68,20 @@ public class UIControler : MonoBehaviour
     void saveStars(int count)
     {
         levelDataCon.LevelStats.Stars[PlayerPrefs.GetInt("LevelToLoad") - 1] = count;
+        saveTime(time);
         string tempjson = JsonUtility.ToJson(levelDataCon.LevelStats);
         Debug.Log(tempjson);
         PlayerPrefs.SetString("LevelStats", tempjson);
         PlayerPrefs.Save();
+    }
+
+    void saveTime(float time)
+    {
+        levelDataCon.LevelStats.Time[PlayerPrefs.GetInt("LevelToLoad") - 1] = time;       
+    }
+
+    void showTime()
+    {
+
     }
 }
